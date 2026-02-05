@@ -1,0 +1,1401 @@
+<!DOCTYPE html><html lang="en"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<meta name="x-poe-datastore-behavior" content="local_only">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxford 3000 B2 Revision Exercise (418-834)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        /* Adjusted Theme Palette */
+        --bg-gradient: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%); /* Sky 200 to Sky 300 */
+        --glass-bg: rgba(255, 255, 255, 0.92);
+        --glass-border: rgba(255, 255, 255, 0.6);
+        --primary-accent: #0284c7; /* Sky 600 */
+        --primary-hover: #0369a1; /* Sky 700 */
+        --text-main: #0f172a; /* Slate 900 */
+        --text-muted: #475569; /* Slate 600 */
+        --correct-color: #059669; /* Emerald 600 */
+        --incorrect-color: #e11d48; /* Rose 600 */
+        --card-bg: #ffffff;
+        --card-hover: #f0f9ff;
+        --shadow-color: rgba(14, 165, 233, 0.15); /* Tinted shadow */
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        line-height: 1.6;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #7dd3fc;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #38bdf8;
+    }
+
+    .app-container {
+        width: 100%;
+        max-width: 850px;
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 20px 40px -10px var(--shadow-color);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* decorative glow behind container */
+    .app-container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    header {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+    }
+
+    header h1 {
+        color: var(--primary-accent);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    header h2 {
+        font-size: 2.2rem;
+        margin: 10px 0;
+        font-weight: 700;
+        background: linear-gradient(to right, #0284c7, #0ea5e9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    /* Screens */
+    #start-screen, #quiz-screen, #end-screen {
+        display: none;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    #start-screen h3 {
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+        font-weight: 500;
+    }
+
+    .question-count-options {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+        background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover));
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.25);
+        font-family: inherit;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(2, 132, 199, 0.4);
+        filter: brightness(1.1);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    /* Quiz Header */
+    #quiz-screen .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        background: rgba(241, 245, 249, 0.6); /* Slate 100 */
+        padding: 12px 20px;
+        border-radius: 12px;
+        gap: 10px;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    #question-counter, #score-counter {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    #score-counter {
+        color: var(--primary-accent);
+    }
+
+    #return-btn {
+        background: white;
+        border: 1px solid #cbd5e1;
+        color: var(--text-muted);
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        white-space: nowrap;
+    }
+    #return-btn:hover {
+        background: #f8fafc;
+        color: var(--text-main);
+        border-color: #94a3b8;
+        transform: none;
+    }
+
+    /* Question Area */
+    #question-text {
+        font-size: 1.5rem;
+        line-height: 1.8;
+        margin: 40px 0;
+        min-height: 100px;
+        font-weight: 400;
+        color: var(--text-main);
+    }
+
+    .blank {
+        display: inline-block;
+        width: 140px;
+        border-bottom: 2px solid var(--primary-accent);
+        margin: 0 8px;
+        vertical-align: -5px;
+    }
+
+    /* Options Grid */
+    #options-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    /* UPDATED OPTION BUTTON STYLES - GLASSY BLUE */
+    .option-btn {
+        width: 100%;
+        /* Glassy Blue Gradient */
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.85), rgba(2, 132, 199, 0.9));
+        
+        /* Glass Effect Properties */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        
+        /* White text for contrast against blue */
+        color: #ffffff;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        
+        /* Glassy Border */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        
+        /* Inner light + Drop Shadow for depth */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        
+        padding: 20px;
+        border-radius: 16px;
+        font-size: 1.15rem;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: inherit;
+        position: relative;
+        overflow: hidden;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+    .option-btn:hover:not(:disabled) {
+        /* Brighter/More Opaque on Hover */
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.95), rgba(2, 132, 199, 1));
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .option-btn.correct {
+        /* Glassy Green */
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.95)); /* Emerald */
+        border-color: rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        color: white;
+    }
+
+    .option-btn.incorrect {
+        /* Glassy Red */
+        background: linear-gradient(135deg, rgba(244, 63, 94, 0.9), rgba(225, 29, 72, 0.95)); /* Rose */
+        border-color: rgba(255, 255, 255, 0.6);
+        color: white;
+        opacity: 0.8;
+    }
+
+    .option-btn:disabled {
+        cursor: default;
+        transform: none !important;
+    }
+
+    /* Feedback Area */
+    #feedback-container {
+        min-height: 60px;
+        margin-top: 25px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(241, 245, 249, 0.5);
+        border-radius: 12px;
+        padding: 10px;
+    }
+
+    #next-btn {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* End Screen */
+    #end-screen h2 {
+        font-size: 2rem;
+        color: var(--text-main);
+    }
+
+    #final-score {
+        font-size: 4rem;
+        font-weight: 800;
+        background: linear-gradient(to bottom right, var(--primary-accent), #38bdf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 10px 0;
+        line-height: 1;
+    }
+
+    #end-comment {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        font-weight: 300;
+    }
+
+    /* Revision List */
+    #revision-container {
+        margin-top: 40px;
+        text-align: left;
+        max-height: 400px;
+        overflow-y: auto;
+        border-top: 1px solid rgba(0,0,0,0.06);
+        padding: 30px 10px 10px 10px;
+    }
+
+    #revision-container h3 {
+        margin-top: 0;
+        color: var(--text-main);
+        font-weight: 600;
+    }
+
+    #revision-list .revision-item {
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        border-left: 4px solid var(--primary-accent);
+        transition: background-color 0.2s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        border: 1px solid #f1f5f9;
+    }
+
+    #revision-list .revision-item:hover {
+        background-color: #f8fafc;
+    }
+
+    #revision-list .revision-item p {
+        margin: 0 0 8px 0;
+        line-height: 1.5;
+    }
+
+    #revision-list .revision-item .word-info {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary-accent);
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    #revision-list .revision-item .word-info span {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 400;
+    }
+
+    #revision-list .revision-item .sentence-info {
+        color: var(--text-main);
+        font-style: italic;
+        opacity: 0.9;
+    }
+
+    #revision-list .revision-item .sentence-info strong {
+        color: var(--correct-color);
+        font-style: normal;
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: rgba(5, 150, 105, 0.4);
+        text-underline-offset: 4px;
+    }
+
+    footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0,0,0,0.06);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    /* Mobile Responsiveness - Optimized for Reduced Scrolling */
+    @media (max-width: 600px) {
+        body {
+            padding: 0;
+            align-items: flex-start; /* Aligns container to top */
+        }
+        
+        .app-container {
+            padding: 15px;
+            border-radius: 0;
+            min-height: 100vh;
+            border: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Compact Header */
+        header {
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 0.75rem;
+            margin-bottom: 2px;
+        }
+        header h2 {
+            font-size: 1.4rem;
+            margin: 2px 0;
+        }
+        header p {
+            font-size: 0.85rem;
+        }
+        
+        /* Compact Quiz Header */
+        #quiz-screen .quiz-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 5px 10px;
+            padding: 8px 12px;
+            margin-bottom: 15px;
+        }
+
+        #question-counter {
+            grid-column: 1;
+            grid-row: 1;
+            text-align: left;
+            font-size: 0.8rem;
+        }
+
+        #score-counter {
+            grid-column: 2;
+            grid-row: 1;
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        #return-btn {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100%;
+            margin-top: 2px;
+            padding: 6px;
+            font-size: 0.8rem;
+        }
+
+        /* Compact Question Text */
+        #question-text {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin: 0 0 15px 0;
+            min-height: auto; /* Remove fixed height */
+            flex-grow: 0;
+        }
+        
+        .blank {
+            width: 80px;
+            border-bottom-width: 1px;
+        }
+        
+        /* Compact Options Grid */
+        #options-container {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .option-btn {
+            padding: 12px;
+            font-size: 0.95rem;
+            border-radius: 10px;
+        }
+        
+        /* Compact Feedback & Footer */
+        #feedback-container {
+            min-height: 40px;
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+
+        #next-btn {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .question-count-options .btn {
+            padding: 10px 20px;
+            flex: 1 1 30%;
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 10px;
+            font-size: 0.7rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <h1>K S Lo English</h1>
+        <h2>Oxford 3000 B2<br>Revision Exercise</h2>
+        <p>Words 418 (joy) - 834 (zone)</p>
+    </header>
+
+    <main>
+        <div id="start-screen">
+            <h3>How many questions would you like to attempt?</h3>
+            <div class="question-count-options">
+                <button class="btn" onclick="startGame(10)">10</button>
+                <button class="btn" onclick="startGame(20)">20</button>
+                <button class="btn" onclick="startGame(30)">30</button>
+                <button class="btn" onclick="startGame(40)">40</button>
+                <button class="btn" onclick="startGame(50)">50</button>
+                <button class="btn" onclick="startGame(100)">100</button>
+            </div>
+        </div>
+
+        <div id="quiz-screen">
+            <div class="quiz-header">
+                <div id="question-counter"></div>
+                <div id="score-counter"></div>
+                <button id="return-btn" class="btn">Return to Title</button>
+            </div>
+            <p id="question-text"></p>
+            <div id="options-container"></div>
+            <div id="feedback-container"></div>
+            <button id="next-btn" class="btn" style="display: none;">Next Question</button>
+        </div>
+
+        <div id="end-screen">
+            <h2>Quiz Complete!</h2>
+            <p>You scored:</p>
+            <div id="final-score"></div>
+            <p id="end-comment"></p>
+            <button id="restart-btn" class="btn">Start Again</button>
+            <div id="revision-container" style="display: none;">
+                <h3>Review Your Answers</h3>
+                <div id="revision-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © <span id="copyright-year"></span> K S Lo English. All Rights Reserved.
+    </footer>
+</div>
+
+<script>
+    // Raw data from CSV (418-834)
+    const rawData = [
+{id: 418, w: "joy", p: "n", d: "歡欣，高興，喜悅", s: "They were filled with joy when their first child was born."},
+{id: 419, w: "judgement", p: "n", d: "判斷力；識別力", s: "You must show good judgement when making these decisions."},
+{id: 420, w: "junior", p: "adj", d: "地位（或等級）較低的；年資較淺的", s: "I object to being told what to do by someone junior to me."},
+{id: 421, w: "justice", p: "n", d: "公正，公平；正義", s: "There's no justice in the world when people can be made to suffer like that."},
+{id: 422, w: "justify", p: "v", d: "為…辯護；證明…正當（或有理、正確）；是…的正當理由", s: "I can't really justify taking another day off work."},
+{id: 423, w: "labour", p: "n", d: "勞動；（尤指）體力勞動", s: "The car parts themselves are not expensive, it's the labour that costs the money."},
+{id: 424, w: "landscape", p: "n", d: "鄉間，野外；（尤指鄉村的）風景，景色", s: "The artist painted a beautiful picture of the rural landscape."},
+{id: 425, w: "largely", p: "adv", d: "主要地；大多；在很大程度上", s: "The engineering company is still largely male in its workforce."},
+{id: 426, w: "latest", p: "n", d: "最新消息；最新技術動態", s: "Have you heard the latest news about Jilly and Patrick?"},
+{id: 427, w: "launch", p: "v", d: "啓動，推出，發起", s: "The programme was launched a year ago."},
+{id: 428, w: "launch", p: "n", d: "啓動儀式，發布會，發表會", s: "How much champagne will we need for the launch?"},
+{id: 429, w: "leadership", p: "n", d: "領導素質，領導能力", s: "What the company lacks is leadership."},
+{id: 430, w: "league", p: "n", d: "（體育項目）聯合會，聯賽，聯盟", s: "Who do you think will win the league championship this year?"},
+{id: 431, w: "lean", p: "v", d: "（使）傾斜，（使）向一側歪斜", s: "She leaned forward and whispered something in my ear."},
+{id: 432, w: "leave", p: "n", d: "假，假日，假期", s: "How much annual leave do you get from your job?"},
+{id: 433, w: "level", p: "v", d: "弄平，使平整", s: "Level the wet cement before it sets."},
+{id: 434, w: "licence", p: "n", d: "許可證，執照，牌照", s: "You need a licence to own a dog here."},
+{id: 435, w: "limited", p: "adj", d: "有限的；不多的，少量的", s: "We only have a limited choice of colours available."},
+{id: 436, w: "line", p: "v", d: "沿著…形成一排", s: "Thousands of people lined the streets to watch the presidential procession pass by."},
+{id: 437, w: "lively", p: "adj", d: "精力充沛的；生氣勃勃的；活躍的", s: "It's hard work teaching a class of lively children."},
+{id: 438, w: "load", p: "n", d: "（尤指車輛、橋樑、動物等的）負重，負荷，載重", s: "The maximum load for this elevator is eight persons."},
+{id: 439, w: "load", p: "v", d: "裝，裝載", s: "How long will it take to load this sand onto the lorry?"},
+{id: 440, w: "loan", p: "n", d: "貸款，借款", s: "She's trying to get a $50,000 loan to start her own business."},
+{id: 441, w: "logical", p: "adj", d: "合乎邏輯的，合理的", s: "That seems like a logical conclusion to the problem."},
+{id: 442, w: "long-term", p: "adj", d: "長期的", s: "The government is trying to reduce long-term unemployment rates."},
+{id: 443, w: "long-term", p: "adv", d: "長期地", s: "This decision will definitely affect the company long-term."},
+{id: 444, w: "loose", p: "adj", d: "鬆的，鬆動的", s: "There were some loose wires hanging out of the wall."},
+{id: 445, w: "lord", p: "n", d: "老爺，貴族", s: "She is currently married to a very wealthy lord."},
+{id: 446, w: "low", p: "n", d: "（人生的）低谷，低潮", s: "She experienced the highs and lows of an acting career."},
+{id: 447, w: "lower", p: "v", d: "降低，使下降", s: "They lowered the coffin into the grave."},
+{id: 448, w: "lung", p: "n", d: "肺，肺部", s: "Smoking is the primary cause of lung cancer worldwide."},
+{id: 449, w: "maintain", p: "v", d: "維持；保持", s: "The army has been brought in to maintain order in the region."},
+{id: 450, w: "majority", p: "n", d: "大多數，大部分", s: "The majority of the employees have university degrees."},
+{id: 451, w: "make", p: "n", d: "（產品的）型號；品牌，牌子", s: "Can you tell me what make your new laptop is?"},
+{id: 452, w: "map", p: "v", d: "繪製…的地圖；在地圖上標示出", s: "Parts of the mountainous region in the north of the country have still not been mapped."},
+{id: 453, w: "mass", p: "n", d: "大量；大批；眾多", s: "The explosion reduced the church to a mass of rubble."},
+{id: 454, w: "mass", p: "adj", d: "大量的；大規模的；大批的", s: "The country was accused of hiding weapons of mass destruction."},
+{id: 455, w: "massive", p: "adj", d: "巨大的；大量的", s: "They have a massive house located near the city centre."},
+{id: 456, w: "master", p: "n", d: "（動物的）主人", s: "With careful training, a dog will obey its master completely."},
+{id: 457, w: "master", p: "v", d: "征服，制伏；控制", s: "I finally mastered my fear of flying."},
+{id: 458, w: "matching", p: "adj", d: "（顏色或樣式）相同的，相配的", s: "She wore a green dress with a matching green handbag."},
+{id: 459, w: "material", p: "adj", d: "物質的；實體的", s: "He is too focused on the comforts of the material world."},
+{id: 460, w: "maximum", p: "adj", d: "最大的；最高的；頂點的", s: "The car reached its maximum speed on the long straight road."},
+{id: 461, w: "maximum", p: "n", d: "最大限度；最大量；最大值", s: "The temperature will reach a maximum of 27°C today."},
+{id: 462, w: "means", p: "n", d: "方法，手段", s: "They had no means of communication."},
+{id: 463, w: "measurement", p: "n", d: "丈量，測量", s: "The test is based on the measurement of blood levels."},
+{id: 464, w: "medium", p: "n", d: "媒介；方法，手段", s: "Television is a very powerful medium for influencing public opinion."},
+{id: 465, w: "melt", p: "v", d: "（使）融化；（使）熔化；（使）溶解", s: "The snow usually melts by mid March."},
+{id: 466, w: "military", p: "adj", d: "軍事的；軍用的", s: "The government strongly opposed any form of foreign military intervention."},
+{id: 467, w: "military", p: "n", d: "武裝部隊；軍方", s: "The military has opposed any cuts in defence spending."},
+{id: 468, w: "mineral", p: "n", d: "礦物", s: "The country is rich in mineral resources such as gold."},
+{id: 469, w: "minimum", p: "adj", d: "最低的，最小的，最低限度的", s: "This certificate is the minimum qualification required to teach English in most language schools."},
+{id: 470, w: "minimum", p: "n", d: "最小值；最少量；最低限度", s: "Wage increases are being kept to a minimum because of the recession."},
+{id: 471, w: "minister", p: "n", d: "部長；大臣", s: "The health minister announced a new plan for hospitals today."},
+{id: 472, w: "minor", p: "adj", d: "較不重要的；次要的；輕微的", s: "She had to undergo a minor operation on her knee."},
+{id: 473, w: "minority", p: "n", d: "少數", s: "It's only a tiny minority of people who are causing the problem."},
+{id: 474, w: "mission", p: "n", d: "（尤指軍事）任務，使命", s: "Your mission is to isolate the enemy by destroying all the bridges across the river."},
+{id: 475, w: "mistake", p: "v", d: "誤認，錯誤辨認", s: "You can't mistake their house - it has a bright yellow front door."},
+{id: 476, w: "mixed", p: "adj", d: "（感覺或觀點）不統一的，褒貶混雜的", s: "There has been a mixed reaction to the changes."},
+{id: 477, w: "model", p: "v", d: "當模特兒；穿戴…展示", s: "Tatjana is modelling a Versace design."},
+{id: 478, w: "modify", p: "v", d: "（稍作）修改，更改，改造，改變", s: "Instead of simply punishing them, the system encourages offenders to modify their behaviour."},
+{id: 479, w: "monitor", p: "n", d: "監督員，核查員", s: "United Nations monitors were not allowed to enter the area."},
+{id: 480, w: "monitor", p: "v", d: "監控；監測；監視，密切注視", s: "The new findings suggest that women ought to monitor their cholesterol levels."},
+{id: 481, w: "moral", p: "adj", d: "道德的", s: "It's her moral obligation to tell the police what she knows"},
+{id: 482, w: "moral", p: "n", d: "道德；品行；道德規範", s: "The play challenges traditional public morals regarding marriage and family."},
+{id: 483, w: "motor", p: "n", d: "發動機，引擎；電動機，馬達", s: "The pump is powered by a small electric motor."},
+{id: 484, w: "motor", p: "adj", d: "汽車的", s: "This has been a difficult year for the motor industry."},
+{id: 485, w: "mount", p: "v", d: "增加；增長；上升", s: "The children's excitement is mounting as Christmas gets nearer."},
+{id: 486, w: "multiple", p: "adj", d: "多個的；多種的", s: "The young man died of multiple burns."},
+{id: 487, w: "multiply", p: "v", d: "大幅增加；乘，使相乘", s: "In warm weather these germs multiply rapidly."},
+{id: 488, w: "mysterious", p: "adj", d: "神秘的事物，難以理解的事物，謎", s: "She's an actress whose inner life has remained mysterious, despite the many interviews she has given."},
+{id: 489, w: "narrow", p: "v", d: "（使）變窄，（使）縮窄", s: "The road narrows after the bridge."},
+{id: 490, w: "national", p: "n", d: "（某國的）國民，公民", s: "30 people, including six Mexican nationals, were killed in yesterday's plane crash."},
+{id: 491, w: "neat", p: "adj", d: "整潔的，整齊的；有序的", s: "Your house is always so neat - how do you manage it?"},
+{id: 492, w: "negative", p: "n", d: "（照片）底片", s: "I found some old black-and-white negatives in the attic yesterday."},
+{id: 493, w: "nerve", p: "n", d: "神經", s: "Damage to the optic nerve can cause permanent vision loss."},
+{id: 494, w: "nevertheless", p: "adv", d: "不過，仍然；儘管如此", s: "I knew a lot about the subject already, but her talk was interesting nevertheless."},
+{id: 495, w: "nightmare", p: "n", d: "夢魘，噩夢", s: "I woke up sweating after having a terrifying nightmare last night."},
+{id: 496, w: "notion", p: "n", d: "觀念；看法", s: "The show's director rejects the notion that seeing violence on television has a harmful effect on children."},
+{id: 497, w: "numerous", p: "adj", d: "許多的，大量的", s: "We have discussed these plans on numerous occasions."},
+{id: 498, w: "obey", p: "v", d: "服從，順從；遵守，遵循", s: "The soldiers refused to obey the orders given by the general."},
+{id: 499, w: "object", p: "v", d: "反對，不贊成；有異議", s: "Would anyone object if we started the meeting now?"},
+{id: 500, w: "objective", p: "n", d: "目標；目的", s: "Her main objective now is simply to stay in power."},
+{id: 501, w: "objective", p: "adj", d: "客觀的；如實的；不帶個人感情的", s: "We need an objective report that is based on facts."},
+{id: 502, w: "obligation", p: "n", d: "義務；責任；職責", s: "If you have not signed a contract, you are under no obligation to pay them any money."},
+{id: 503, w: "observation", p: "n", d: "觀察；觀測；監視", s: "The students learned a lot through the close observation of nature."},
+{id: 504, w: "observe", p: "v", d: "觀察；觀測；監視", s: "The role of scientists is to observe and describe the world, not to try to control it."},
+{id: 505, w: "obtain", p: "v", d: "得到，獲得", s: "You must obtain permission before you can build on this land."},
+{id: 506, w: "occasionally", p: "adv", d: "偶爾，間或；有時", s: "I see him occasionally in town."},
+{id: 507, w: "offence", p: "n", d: "犯罪行為；罪行", s: "Driving without a licence is considered a very serious offence."},
+{id: 508, w: "offend", p: "v", d: "冒犯，得罪，惹惱", s: "I think she was offended that she hadn't been invited to the party."},
+{id: 509, w: "offensive", p: "adj", d: "冒犯的", s: "This programme contains language that some viewers might find offensive."},
+{id: 510, w: "official", p: "n", d: "官員；要員；高級職員", s: "A government official will visit the site to inspect the damage."},
+{id: 511, w: "opening", p: "n", d: "洞；孔；開口", s: "The children crawled through an opening in the fence."},
+{id: 512, w: "operate", p: "v", d: "（使）工作，（使）運行；運作；操作；起作用", s: "How do you operate the remote control unit?"},
+{id: 513, w: "opponent", p: "n", d: "反對者", s: "He shook hands with his political opponent after the debate ended."},
+{id: 514, w: "oppose", p: "v", d: "反對；反抗；抵制", s: "The proposed new testing system has been vigorously opposed by teachers."},
+{id: 515, w: "opposed", p: "adj", d: "完全不同的，截然相反的，迥然不同的", s: "His view of the situation is diametrically opposed to mine."},
+{id: 516, w: "opposition", p: "n", d: "（強烈的）反對，反抗，對抗", s: "There is a lot of opposition to the proposed changes."},
+{id: 517, w: "organ", p: "n", d: "（動植物的）器官", s: "The liver is the largest internal organ in the human body."},
+{id: 518, w: "origin", p: "n", d: "起源，源頭；起因", s: "It's a book about the origin of the universe."},
+{id: 519, w: "otherwise", p: "adv", d: "別樣地，以另外的方式", s: "The police believe he is the thief, but all the evidence suggests otherwise."},
+{id: 520, w: "outcome", p: "n", d: "結果，後果；效果", s: "It's too early to predict the outcome of the meeting."},
+{id: 521, w: "outer", p: "adj", d: "遠離中心的；外圍的", s: "They live in a quiet suburb located in outer London."},
+{id: 522, w: "outline", p: "n", d: "輪廓，略圖，外形", s: "She drew the outline of the boat and then coloured it in."},
+{id: 523, w: "outline", p: "v", d: "勾勒，描畫…的輪廓", s: "The area we're interested in is outlined in red on the map."},
+{id: 524, w: "overall", p: "adj", d: "總的；全面的；包括一切的", s: "The overall situation is good, despite a few minor problems."},
+{id: 525, w: "overall", p: "adv", d: "總的來說；全面地；包括一切地", s: "The company will invest $1.6m overall in new equipment."},
+{id: 526, w: "owe", p: "v", d: "欠（債）；欠（帳）；該償還", s: "I still owe Janet fifty dollars for the concert tickets."},
+{id: 527, w: "pace", p: "n", d: "（移動的）步調；（發生的）速度；節奏", s: "The runners started the race at a very fast pace."},
+{id: 528, w: "pace", p: "v", d: "為…定速度", s: "No more soup, thank you. I'm pacing myself so that I have room for a dessert."},
+{id: 529, w: "package", p: "v", d: "把…打包（或裝箱）", s: "These organic olives are packaged in recycled glass containers."},
+{id: 530, w: "panel", p: "n", d: "（選定的）專家小組", s: "The competition will be judged by a panel of experts."},
+{id: 531, w: "parliament", p: "n", d: "議會；國會", s: "On Tuesday the country's parliament voted to establish its own army."},
+{id: 532, w: "participant", p: "n", d: "參加者，參與者", s: "The average age of study participants was 48 years."},
+{id: 533, w: "partly", p: "adv", d: "某種程度上", s: "His attractiveness is partly due to his self-confidence."},
+{id: 534, w: "passage", p: "n", d: "過道，走廊", s: "A narrow passage led directly through the house into the garden."},
+{id: 535, w: "patient", p: "adj", d: "病人", s: "Dinner will be ready in half an hour - just be patient!"},
+{id: 536, w: "pension", p: "n", d: "養老金；退休金；撫恤金", s: "He has been living on a government pension since he retired."},
+{id: 537, w: "permanent", p: "adj", d: "長久的；永久的，永恆的", s: "She is looking for a permanent place to stay."},
+{id: 538, w: "permit", p: "v", d: "允許，准許", s: "The regulations do not permit much flexibility."},
+{id: 539, w: "permit", p: "n", d: "許可證，特許證", s: "You will need a work permit to get a job here."},
+{id: 540, w: "perspective", p: "n", d: "（思考問題的）角度，觀點，想法", s: "Her attitude lends a fresh perspective to the subject."},
+{id: 541, w: "phase", p: "n", d: "（發展或變化的）階段，時期", s: "The project is only in its initial phase as yet, but it's looking quite promising."},
+{id: 542, w: "phenomenon", p: "n", d: "（尤指不尋常的或有趣的）現象", s: "Gravity is a natural phenomenon that keeps us on the ground."},
+{id: 543, w: "philosophy", p: "n", d: "哲學", s: "René Descartes is regarded as the founder of modern philosophy."},
+{id: 544, w: "pick", p: "n", d: "挑選；選擇", s: "You can have first pick of the desserts."},
+{id: 545, w: "picture", p: "v", d: "想像，設想", s: "Picture the scene - the crowds of people and animals, the noise, the dirt."},
+{id: 546, w: "pile", p: "n", d: "疊；垛；堆", s: "There is a huge pile of books on his desk."},
+{id: 547, w: "pile", p: "v", d: "把…堆積（或堆疊）起來", s: "We piled plenty of logs up next to the fire."},
+{id: 548, w: "pitch", p: "n", d: "運動場地；（尤指）足球場", s: "The children are playing a game on the football pitch."},
+{id: 549, w: "plain", p: "adj", d: "樸素的；不加修飾的；簡單的", s: "She wore a plain black dress."},
+{id: 550, w: "plot", p: "v", d: "秘密計劃；陰謀", s: "The army is plotting the overthrow of the government."},
+{id: 551, w: "plus", p: "adj", d: "略大的，略高的；以上的", s: "The weather forecast predicts temperatures of 40 plus for tomorrow."},
+{id: 552, w: "plus", p: "n", d: "優勢，好處，長處", s: "Your teaching experience will be a plus in this job."},
+{id: 553, w: "plus", p: "conj", d: "並且，而且；加上", s: "There will be two adults travelling, plus three children."},
+{id: 554, w: "pointed", p: "adj", d: "尖的，尖角的", s: "He's got funny little pointed ears."},
+{id: 555, w: "popularity", p: "n", d: "流行", s: "The increasing popularity of organic food is evident in supermarkets."},
+{id: 556, w: "pose", p: "v", d: "造成，引起（尤指問題或困難）", s: "Nuclear weapons pose a threat to everyone."},
+{id: 557, w: "position", p: "v", d: "安放，放置；使駐紮", s: "The army had been positioned to the north and east of the city."},
+{id: 558, w: "positive", p: "n", d: "正面", s: "What are the positives and negatives of going this route?"},
+{id: 559, w: "possess", p: "v", d: "擁有；具有", s: "I don't possess a single DVD in my entire collection."},
+{id: 560, w: "potential", p: "adj", d: "潛在的，可能的", s: "A number of potential buyers have expressed interest in the company."},
+{id: 561, w: "potential", p: "n", d: "潛力，潛能", s: "The region has enormous potential for economic development."},
+{id: 562, w: "power", p: "v", d: "為…提供動力，驅動", s: "Buses and trucks are usually powered by diesel engines."},
+{id: 563, w: "praise", p: "n", d: "讚揚，表揚", s: "They deserve praise for all their hard work."},
+{id: 564, w: "praise", p: "v", d: "讚揚，表揚", s: "He should be praised for his honesty."},
+{id: 565, w: "pregnant", p: "adj", d: "懷孕的，妊娠的", s: "My mother stopped smoking when she became pregnant."},
+{id: 566, w: "preparation", p: "n", d: "準備工作；準備，預備", s: "The teacher didn't seem to have done much preparation for the class."},
+{id: 567, w: "presence", p: "n", d: "出席，在場；（事物的）存在，出現", s: "She was overawed by the presence of so many people."},
+{id: 568, w: "preserve", p: "v", d: "保護，維護；保存；保養", s: "We must do everything we can to preserve the environment."},
+{id: 569, w: "price", p: "v", d: "給…定價，給…標價", s: "The car is priced at £28,000."},
+{id: 570, w: "prime", p: "adj", d: "首要的，主要的；基本的", s: "This is a prime example of 1930s architecture."},
+{id: 571, w: "principle", p: "n", d: "原理；原則", s: "He studied the basic principles of the criminal justice system."},
+{id: 572, w: "print", p: "n", d: "印出的字體，印刷字體", s: "The title is in bold print."},
+{id: 573, w: "priority", p: "n", d: "優先考慮的事", s: "The management did not seem to consider office safety to be a priority."},
+{id: 574, w: "privacy", p: "n", d: "隱私權", s: "The new law is designed to protect people's privacy."},
+{id: 575, w: "procedure", p: "n", d: "程式；步驟；常規", s: "The company has new procedures for dealing with complaints."},
+{id: 576, w: "process", p: "v", d: "處理；辦理", s: "Visa applications take 28 days to process."},
+{id: 577, w: "produce", p: "n", d: "（尤指大量生產的）食品，農產品", s: "The market sells a wide variety of fresh local produce."},
+{id: 578, w: "professional", p: "n", d: "專業人員", s: "We need to consult with qualified health professionals about this."},
+{id: 579, w: "progress", p: "v", d: "進步；改進；進展", s: "My Spanish never really progressed beyond the stage of being able to order drinks at the bar."},
+{id: 580, w: "project", p: "v", d: "預計，推算", s: "Government spending is projected to rise by three percent next year."},
+{id: 581, w: "proof", p: "n", d: "證據；證物；證明", s: "Do they have any proof that it was Hampson who stole the goods?"},
+{id: 582, w: "proposal", p: "n", d: "建議；計劃；提案", s: "Congress has rejected the latest economic proposal put forward by the President."},
+{id: 583, w: "propose", p: "v", d: "建議；提議；提出", s: "I propose that we wait until the budget has been announced before committing ourselves to any expenditure."},
+{id: 584, w: "prospect", p: "n", d: "（發生好事情的）可能，可能性，機會", s: "Is there any prospect of the weather improving?"},
+{id: 585, w: "protection", p: "n", d: "保護；受保護", s: "Their flimsy tent gave little protection against the severe storm."},
+{id: 586, w: "psychologist", p: "n", d: "心理學家", s: "She decided to take her son to see a child psychologist."},
+{id: 587, w: "psychology", p: "n", d: "心理學", s: "She studied psychology at Harvard before becoming a teacher."},
+{id: 588, w: "publication", p: "n", d: "發表；公佈；出版", s: "The brochure will be ready for publication in September."},
+{id: 589, w: "pupil", p: "n", d: "學生，（尤指）小學生", s: "The school gave an award to a bright second-year pupil."},
+{id: 590, w: "purchase", p: "n", d: "購買物", s: "How do you wish to pay for your purchases?"},
+{id: 591, w: "purchase", p: "v", d: "購買", s: "Tickets must be purchased two weeks in advance."},
+{id: 592, w: "pure", p: "adj", d: "純的，不摻雜的", s: "He prefers to wear a pure cotton shirt in summer."},
+{id: 593, w: "pursue", p: "v", d: "追趕；追捕；追擊", s: "The car was pursued by helicopters."},
+{id: 594, w: "range", p: "v", d: "（數量、種類等變化的）範圍，幅度，區域", s: "Dress sizes range from petite to extra large."},
+{id: 595, w: "rank", p: "n", d: "職位；官階；軍銜", s: "He was promoted to a high rank in the army."},
+{id: 596, w: "rank", p: "v", d: "具有…的地位（或等級）；把…分等級；確定…的地位（或等級）", s: "The players were ranked according to their ability to score."},
+{id: 597, w: "rapid", p: "adj", d: "快的；迅猛的", s: "The 1990s were a period of rapid economic growth."},
+{id: 598, w: "rapidly", p: "adv", d: "快速地，迅猛地", s: "Things are changing very rapidly in the technology sector."},
+{id: 599, w: "rate", p: "v", d: "評估；評價；估價", s: "How do you rate him as a football player?"},
+{id: 600, w: "raw", p: "adj", d: "（食物）生的，未經烹調的，沒煮的", s: "Sushi is a Japanese dish that often contains raw fish."},
+{id: 601, w: "reach", p: "n", d: "伸手可及的距離", s: "I like to keep a notebook and pencil within arm's reach."},
+{id: 602, w: "realistic", p: "adj", d: "現實的；實事求是的；務實的", s: "Let's be realistic; I simply cannot afford to pay that much money."},
+{id: 603, w: "reasonable", p: "adj", d: "合情理的；講道理的；公平的", s: "If you tell him what happened, I'm sure he'll understand - he's a reasonable man."},
+{id: 604, w: "recall", p: "v", d: "回憶起；回想起；記得", s: "The old man recalled the city as it had been before the war."},
+{id: 605, w: "recover", p: "v", d: "（在疾病或受傷之後）完全恢復健康", s: "It took her a long time to recover from her heart operation."},
+{id: 606, w: "reduction", p: "n", d: "減少；減小；降低；縮小", s: "The new road system led to a significant reduction in traffic."},
+{id: 607, w: "regard", p: "v", d: "考慮，思考；將…認為；看待", s: "Environmentalists regard GM technology with suspicion."},
+{id: 608, w: "regard", p: "n", d: "尊敬，尊重；關心，關注", s: "The company holds her in high regard."},
+{id: 609, w: "regional", p: "adj", d: "地區的；區域的", s: "He spoke with a very strong regional accent during the interview."},
+{id: 610, w: "register", p: "v", d: "（尤指把姓名）登記，註冊，記錄", s: "I registered the car in my name."},
+{id: 611, w: "register", p: "n", d: "花名冊；登記簿；註冊表", s: "Guests write their names in the hotel register."},
+{id: 612, w: "regret", p: "v", d: "懊悔，遺憾；惋惜；痛惜", s: "Is there anything you've done in your life that you regret?"},
+{id: 613, w: "regret", p: "n", d: "懊悔，遺憾；惋惜；痛惜", s: "I left school at 16, but I've had a great life and I have no regrets."},
+{id: 614, w: "regulation", p: "n", d: "規則，條例，法規；控制，管理", s: "All employees must strictly follow the new fire safety regulations."},
+{id: 615, w: "relatively", p: "adv", d: "較好／較差等", s: "He's a relatively good squash player."},
+{id: 616, w: "relevant", p: "adj", d: "有關的；相關聯的；切題的", s: "Education should be relevant to the child's needs."},
+{id: 617, w: "relief", p: "n", d: "（不快過後的）寬慰，寬心，輕鬆，解脫", s: "It was such a relief to hear that Marta was found safe and well."},
+{id: 618, w: "rely", p: "v", d: "依賴；依靠；依仗", s: "The success of this project relies on everyone making an effort."},
+{id: 619, w: "remark", p: "n", d: "言辭；話語；談論；評論", s: "Her remarks on the employment question led to a heated discussion."},
+{id: 620, w: "remark", p: "v", d: "說起；評論說；談論", s: "Dr Johnson once remarked that when a man is tired of London, he is tired of life."},
+{id: 621, w: "representative", p: "n", d: "代表；代理人", s: "The firm has representatives in every major city."},
+{id: 622, w: "representative", p: "adj", d: "有代表性的；典型的；代表…的", s: "Are your views representative of all the workers here?"},
+{id: 623, w: "reputation", p: "n", d: "名譽；聲望；名望", s: "The company has a worldwide reputation for quality."},
+{id: 624, w: "requirement", p: "n", d: "需要；有賴於；要求；規定", s: "A good degree is a minimum requirement for many jobs."},
+{id: 625, w: "rescue", p: "v", d: "救援；營救；解救", s: "The lifeboat rescued the sailors from the sinking boat."},
+{id: 626, w: "rescue", p: "n", d: "救援；營救；解救", s: "Lifeboats carry out many rescues every month."},
+{id: 627, w: "reserve", p: "n", d: "拘謹；矜持；內向", s: "I took her out for a drink and tried to break through her reserve."},
+{id: 628, w: "reserve", p: "v", d: "把…專門留給；把…留作；保留", s: "I reserve Mondays for tidying my desk and answering letters."},
+{id: 629, w: "resident", p: "n", d: "居民；住戶", s: "He has been a resident of the UK for ten years."},
+{id: 630, w: "resident", p: "adj", d: "居住的；定居的；居留的", s: "She is currently resident in Moscow for her work assignment."},
+{id: 631, w: "resist", p: "v", d: "反抗；回擊；抵抗", s: "The soldiers resisted the enemy attacks for two days."},
+{id: 632, w: "resolve", p: "v", d: "解決；解除；消除", s: "Have you resolved the problem of transport yet?"},
+{id: 633, w: "resort", p: "n", d: "渡假勝地；旅遊勝地", s: "We stayed at a popular tourist resort near the beach."},
+{id: 634, w: "retain", p: "v", d: "保持；保留；保有", s: "She has lost her battle to retain control of the company."},
+{id: 635, w: "reveal", p: "v", d: "揭露；洩露；透露", s: "He was jailed for revealing secrets to the Russians."},
+{id: 636, w: "revolution", p: "n", d: "（通常指改變政治體制的）革命", s: "The French Revolution changed France from a monarchy to a republic."},
+{id: 637, w: "reward", p: "n", d: "報答；報償；酬謝；獎賞", s: "There's a reward for whoever finishes first."},
+{id: 638, w: "reward", p: "v", d: "報答；報償；獎賞", s: "The company rewarded him for his years of service with a grand farewell party and several presents."},
+{id: 639, w: "rhythm", p: "n", d: "（音樂、詩歌和舞蹈的）節奏，韻律，節律", s: "He beat out a jazz rhythm on the drums."},
+{id: 640, w: "rid", p: "v", d: "擺脫掉…；免去…的負擔", s: "She wanted to be rid of her parents and their authority."},
+{id: 641, w: "root", p: "n", d: "根，根莖，根塊", s: "We moored the boat to a large tree root."},
+{id: 642, w: "round", p: "n", d: "一連串的事情；一系列的事件；一系列活動", s: "Russia and America will hold another round of talks next month."},
+{id: 643, w: "routine", p: "adj", d: "常規的", s: "The doctor performed a routine medical check-up on the patient."},
+{id: 644, w: "rub", p: "v", d: "擦；摩擦；搓；揉搓", s: "She yawned and rubbed her eyes sleepily."},
+{id: 645, w: "rubber", p: "n", d: "橡膠；合成橡膠", s: "Tyres are almost always made of rubber."},
+{id: 646, w: "rubber", p: "adj", d: "橡膠製的", s: "The dog loved to play with his small rubber ball."},
+{id: 647, w: "rural", p: "adj", d: "鄉村的，農村的；似鄉村的", s: "The area is still very rural and undeveloped."},
+{id: 648, w: "rush", p: "v", d: "（使）急速行進；（使）趕緊；（使）倉促行事；（使）急速做", s: "I have been rushing around all day trying to finish everything."},
+{id: 649, w: "rush", p: "n", d: "匆忙，趕緊；衝，奔", s: "Why are you in such a rush to leave today?"},
+{id: 650, w: "sample", p: "v", d: "嚐，品嚐", s: "As the food looked so good, he decided to sample a little from each dish."},
+{id: 651, w: "satellite", p: "n", d: "人造衛星", s: "The World Cup was transmitted around the world by satellite."},
+{id: 652, w: "satisfied", p: "adj", d: "滿足的；滿意的", s: "Some people are never satisfied with what they already have."},
+{id: 653, w: "satisfy", p: "v", d: "使滿足，使滿意", s: "They have 31 flavours of ice cream - enough to satisfy everyone!"},
+{id: 654, w: "saving", p: "n", d: "存款，儲蓄金", s: "He spent all his savings on an expensive car."},
+{id: 655, w: "scale", p: "n", d: "尺度，刻度；等級", s: "The thermometer measures temperature on the Fahrenheit scale."},
+{id: 656, w: "schedule", p: "v", d: "爲…安排時間；安排，排定", s: "The meeting has been scheduled for tomorrow afternoon."},
+{id: 657, w: "scheme", p: "n", d: "陰謀，詭計", s: "He has a crazy scheme for getting rich before he's twenty."},
+{id: 658, w: "scream", p: "v", d: "（尤指因恐懼、興奮、憤怒等強烈情緒而）尖叫，驚呼", s: "A spider landed on her pillow and she screamed."},
+{id: 659, w: "scream", p: "n", d: "尖叫，驚呼", s: "She let out a loud scream of joy when she won."},
+{id: 660, w: "screen", p: "v", d: "測試；檢查", s: "Women over 50 should be screened for breast cancer."},
+{id: 661, w: "seat", p: "v", d: "給…安排座位", s: "The waiter greeted me with a big smile and seated us by the window."},
+{id: 662, w: "sector", p: "n", d: "（一國經濟活動的）部門，領域，行業", s: "In the financial sector, banks and insurance companies have both lost a lot of money."},
+{id: 663, w: "secure", p: "v", d: "獲得；設法得到", s: "He was disappointed by his failure to secure the top job with the bank."},
+{id: 664, w: "secure", p: "adj", d: "牢靠的；牢固的", s: "That ladder doesn't look very secure to me."},
+{id: 665, w: "seek", p: "v", d: "尋找；尋求（尤指非物質的東西）", s: "\"Are you actively seeking jobs?\" she asked."},
+{id: 666, w: "select", p: "v", d: "選擇；挑選", s: "There was a choice of four prizes, and the winner could select one of them."},
+{id: 667, w: "selection", p: "n", d: "選擇；挑選", s: "The selection process for the new job was very difficult."},
+{id: 668, w: "self", p: "n", d: "本性；自己；自我", s: "The hero of the movie finally finds his true self."},
+{id: 669, w: "senior", p: "adj", d: "級別高的", s: "He holds a position in senior management at the bank."},
+{id: 670, w: "sense", p: "v", d: "意識到；感覺到", s: "Although she said nothing, I could sense her anger"},
+{id: 671, w: "sensitive", p: "adj", d: "神經過敏的；易被冒犯的；敏感的", s: "Her reply showed that she was very sensitive to criticism."},
+{id: 672, w: "sentence", p: "v", d: "（法官）宣佈判決，宣判", s: "He was sentenced to life imprisonment."},
+{id: 673, w: "sequence", p: "n", d: "一連串；一系列；順序，次序", s: "The first chapter describes the strange sequence of events that led to his death."},
+{id: 674, w: "session", p: "n", d: "（議會等機構的）會議；（法庭的）開庭", s: "The parliamentary session is due to end on 27 May."},
+{id: 675, w: "settle", p: "v", d: "確定；決定；解決，結束（爭端等）", s: "Good, that's all settled - you send out the invitations for the party, and I'll organize the food."},
+{id: 676, w: "severe", p: "adj", d: "非常嚴重的；劇烈的；慘重的", s: "The patient was suffering from a severe chest infection."},
+{id: 677, w: "shade", p: "n", d: "陰處；陰涼處", s: "The sun was hot, and there were no trees to offer us shade."},
+{id: 678, w: "shadow", p: "n", d: "陰影，影子", s: "The children were playing, jumping on each other's shadows."},
+{id: 679, w: "shallow", p: "adj", d: "淺的，不深的", s: "The stream was fairly shallow so we were able to walk across it."},
+{id: 680, w: "shame", p: "n", d: "可惜，遺憾", s: "It is a real shame that the event was cancelled."},
+{id: 681, w: "shape", p: "v", d: "決定（或影響）（尤指信仰或思想）的形式；決定，影響（性格）", s: "Many people are not able to shape their own destinies."},
+{id: 682, w: "shelter", p: "n", d: "掩蔽（處）；遮蔽（處）", s: "The family ran to the air-raid shelter during the attack."},
+{id: 683, w: "shelter", p: "v", d: "躲避；保護；遮蔽", s: "We were caught in a thunderstorm, without anywhere to shelter."},
+{id: 684, w: "shift", p: "v", d: "（尤指略微地）移動；改變；轉移", s: "She shifted uneasily from one foot to the other."},
+{id: 685, w: "ship", p: "v", d: "運輸，運送", s: "We ship books out to New York every month."},
+{id: 686, w: "shock", p: "n", d: "令人震驚的事件（或經歷）；驚愕，震驚", s: "Her mother's death came as a great shock - it was so unexpected."},
+{id: 687, w: "shock", p: "v", d: "（使）憤怒，（使）生氣，（使）不快", s: "The advertisements were designed to shock - that was the whole point of the campaign."},
+{id: 688, w: "shocked", p: "adj", d: "震驚的", s: "I was quite shocked when I found out what he'd done."},
+{id: 689, w: "shooting", p: "n", d: "發射；射擊；開槍；開火", s: "We heard some shooting in the night."},
+{id: 690, w: "shot", p: "n", d: "（板球、足球、網球或高爾夫球中旨在得分的）攻擊，擊打", s: "And that was a great shot by Márquez!"},
+{id: 691, w: "significant", p: "adj", d: "重要的；顯著的", s: "There has been a significant increase in the number of women students in recent years."},
+{id: 692, w: "significantly", p: "adv", d: "顯著地；相當數量地", s: "My piano playing has improved significantly since I started with a new teacher."},
+{id: 693, w: "silence", p: "n", d: "寧靜；寂靜", s: "A loud crash of thunder broke the silence of the night."},
+{id: 694, w: "silk", p: "n", d: "絲綢；絲線", s: "She wore a beautiful silk dress to the party."},
+{id: 695, w: "sincere", p: "adj", d: "（人、感情或行爲）真誠的，誠實的", s: "He offered a sincere apology for his rude behavior."},
+{id: 696, w: "slave", p: "n", d: "奴隸", s: "Black slaves used to work on the cotton plantations of the southern United States."},
+{id: 697, w: "slide", p: "v", d: "（使）滑動，（使）滑行", s: "When I was little I used to like sliding on the polished floor in my socks."},
+{id: 698, w: "slide", p: "n", d: "山崩，落石坍方；崩塌", s: "The heavy rain caused a dangerous mud slide yesterday."},
+{id: 699, w: "slight", p: "adj", d: "少量的，微小的", s: "There has been a slight improvement in his condition."},
+{id: 700, w: "slip", p: "v", d: "滑倒；失足", s: "She slipped on the ice and hurt her back."},
+{id: 701, w: "slope", p: "n", d: "斜坡", s: "The roof is built at a slope of thirty degrees."},
+{id: 702, w: "slope", p: "v", d: "斜坡", s: "The narrow path slopes gently up to the old house."},
+{id: 703, w: "solar", p: "adj", d: "太陽的；來自太陽的；使用太陽能的", s: "Many modern homes are now powered by solar energy panels."},
+{id: 704, w: "somewhat", p: "adv", d: "有點，稍微有些", s: "The resort has changed somewhat over the last few years."},
+{id: 705, w: "soul", p: "n", d: "靈魂；心性，心靈", s: "She suffered greatly while she was alive, so let us hope her soul is now at peace."},
+{id: 706, w: "specialist", p: "n", d: "專家；專業人員", s: "We need to hire a software specialist for this project."},
+{id: 707, w: "specialist", p: "adj", d: "專家的；專業人員的", s: "This job requires specialist knowledge of ancient history and languages."},
+{id: 708, w: "species", p: "n", d: "（動植物的）種，物種", s: "Mountain gorillas are an endangered species."},
+{id: 709, w: "speed", p: "v", d: "（使）快速移動；（使）快速前行；加速；促進", s: "The train sped along at over 120 miles per hour."},
+{id: 710, w: "spiritual", p: "adj", d: "精神的，心靈的；（尤指）宗教的", s: "Traditional ways of life fulfilled both economic and spiritual needs."},
+{id: 711, w: "split", p: "v", d: "（使）裂開；（使）分開", s: "The prize was split between Susan and Kate."},
+{id: 712, w: "split", p: "n", d: "裂縫；裂口", s: "Rain was getting in through a split in the plastic sheeting."},
+{id: 713, w: "sponsor", p: "v", d: "資助，贊助；支持", s: "The team is sponsored by JVC, so the players wear the letters JVC on their shirts."},
+{id: 714, w: "sponsor", p: "n", d: "贊助者", s: "The programme is funded by a number of corporate sponsors."},
+{id: 715, w: "spot", p: "v", d: "點；斑點；圓點", s: "He had a spot of grease on his tie."},
+{id: 716, w: "spread", p: "n", d: "擴散，蔓延", s: "The spread of the disease in the last few years has been alarming."},
+{id: 717, w: "stable", p: "adj", d: "穩定的；穩固的；牢固的", s: "If the foundations of the house aren't stable, collapse is possible."},
+{id: 718, w: "stage", p: "v", d: "上演，演出", s: "The local drama group is staging a production of the musical \"Grease\"."},
+{id: 719, w: "stand", p: "n", d: "看臺", s: "Fighting broke out in the stands five minutes before the end of the match."},
+{id: 720, w: "stare", p: "v", d: "（尤指驚訝、害怕或思考時）盯著看，凝視，注視", s: "Don't stare at people like that, it's rude."},
+{id: 721, w: "status", p: "n", d: "（尤指在社會中的）地位，身份", s: "The association works to promote the status of retired people as useful members of the community."},
+{id: 722, w: "steady", p: "adj", d: "穩步的；持續的；有規律的", s: "The procession moved through the streets at a steady pace."},
+{id: 723, w: "steel", p: "n", d: "鋼", s: "The modern bridge is supported by strong steel girders."},
+{id: 724, w: "steep", p: "adj", d: "（斜坡）陡的，陡峭的", s: "It was difficult to climb up the steep slope."},
+{id: 725, w: "step", p: "v", d: "跨步，邁步；踩，踏", s: "She stepped backwards and fell over a chair."},
+{id: 726, w: "sticky", p: "adj", d: "黏性的；黏的；塗有黏膠的", s: "The spilled juice left a sticky mess on the floor."},
+{id: 727, w: "stiff", p: "adj", d: "硬的，挺的，堅實的", s: "The box was made of very stiff cardboard material."},
+{id: 728, w: "stock", p: "n", d: "儲備物；供應物；存貨", s: "It is now halfway through winter and food stocks are already low."},
+{id: 729, w: "stream", p: "n", d: "小河，溪流", s: "We sat by the mountain stream and watched the water."},
+{id: 730, w: "stretch", p: "v", d: "伸出；伸長；拉伸", s: "I tripped on a piece of wire that someone had stretched across the path."},
+{id: 731, w: "stretch", p: "n", d: "（土地或水域的）一片，一段", s: "This particular stretch of coast is especially popular with hikers."},
+{id: 732, w: "strict", p: "adj", d: "要求嚴格的，嚴厲的", s: "My parents were very strict with me when I was young."},
+{id: 733, w: "strike", p: "v", d: "罷工", s: "Democratization has brought workers the right to strike and join a trade union."},
+{id: 734, w: "strike", p: "n", d: "罷工", s: "After last year's long and bitter strike, few people want more industrial action."},
+{id: 735, w: "structure", p: "v", d: "構成；組織", s: "We must carefully structure and rehearse each scene."},
+{id: 736, w: "struggle", p: "v", d: "奮鬥，努力，拼搏", s: "The dog had been struggling to get free of the wire noose."},
+{id: 737, w: "struggle", p: "n", d: "（應對困難而需要的）掙扎；努力，奮鬥", s: "It was a terrible struggle for him to accept her death."},
+{id: 738, w: "stuff", p: "v", d: "裝滿，填滿，塞滿", s: "Stuff the pillow and then sew up the final seam."},
+{id: 739, w: "subject", p: "adj", d: "有；遭受，承受", s: "Cars are subject to a high domestic tax."},
+{id: 740, w: "submit", p: "v", d: "提交；呈遞", s: "You must submit your application before 1 January."},
+{id: 741, w: "sum", p: "n", d: "金額", s: "Huge sums of money are spent on national defence."},
+{id: 742, w: "sum", p: "v", d: "總結，概述，概括", s: "The best way of summing up the situation in our office is to say that it is \"absolute chaos\"."},
+{id: 743, w: "surgery", p: "n", d: "外科手術", s: "The patient successfully underwent major surgery on his heart."},
+{id: 744, w: "surround", p: "v", d: "環繞，圍繞，包圍", s: "Beautiful snow-capped mountains completely surround the small city."},
+{id: 745, w: "surrounding", p: "adj", d: "周圍的，附近的", s: "A lot of the children at the school do not live in the town, but come in from the surrounding countryside."},
+{id: 746, w: "survey", p: "v", d: "（尤指認真地）審視，檢查", s: "He got out of the car to survey the damage."},
+{id: 747, w: "suspect", p: "v", d: "懷疑，猜想，認為（某事有可能）", s: "So far, the police do not suspect foul play."},
+{id: 748, w: "suspect", p: "n", d: "嫌疑犯，可疑分子", s: "Police have issued a photograph of the suspect."},
+{id: 749, w: "swear", p: "v", d: "詛咒，咒罵", s: "It was a real shock, the first time I heard my mother swear."},
+{id: 750, w: "sweep", p: "v", d: "打掃，清掃，掃除", s: "Please sweep the floor before the guests arrive tonight."},
+{id: 751, w: "switch", p: "n", d: "開關", s: "Please remember to turn off the light switch when leaving."},
+{id: 752, w: "sympathy", p: "n", d: "同情（心），理解", s: "The president has sent a message of sympathy to the relatives of the dead soldiers."},
+{id: 753, w: "tale", p: "n", d: "（尤指包含離奇內容的）故事，不實之詞", s: "He told some fascinating tales about his life in India."},
+{id: 754, w: "tank", p: "n", d: "（盛放液體或氣體的）容器", s: "The large water tank supplies the whole village with water."},
+{id: 755, w: "target", p: "v", d: "（廣告、批評或產品）以…為目標（或對象）", s: "The advert for the energy drink is targeted specifically at young people."},
+{id: 756, w: "tear", p: "v", d: "（被）撕開，（被）撕掉，（被）撕裂", s: "You have to be very careful with books this old because the paper tears very easily."},
+{id: 757, w: "tear", p: "n", d: "裂口；裂縫", s: "This sheet has a tear in it."},
+{id: 758, w: "tear", p: "n", d: "眼淚，淚珠", s: "She cried tears of joy when she saw her family."},
+{id: 759, w: "temporary", p: "adj", d: "短暫的；暫時的，臨時的", s: "The ceasefire will only provide a temporary solution to the crisis."},
+{id: 760, w: "term", p: "v", d: "把…稱為，把…叫作", s: "Technically, a horse that is smaller than 1.5 metres at the shoulder is termed a pony."},
+{id: 761, w: "therapy", p: "n", d: "治療；療法", s: "He needs occupational therapy to recover from his hand injury."},
+{id: 762, w: "threat", p: "n", d: "威脅，恐嚇", s: "Her parents carried out their threat to take away her mobile phone if her grades didn't improve."},
+{id: 763, w: "threaten", p: "v", d: "威脅，恐嚇；揚言要", s: "They threatened the shopkeeper with a gun."},
+{id: 764, w: "thus", p: "adv", d: "如此，這樣", s: "You should bend forward from the waist, thus, to stretch."},
+{id: 765, w: "time", p: "v", d: "確定…的時間，為…安排時間", s: "We timed our trip to coincide with my cousin's wedding."},
+{id: 766, w: "title", p: "v", d: "給（圖書、電影、戲劇、歌曲或藝術品）起名", s: "He titled his autobiography \"Beneath the Underdog\"."},
+{id: 767, w: "tone", p: "n", d: "語氣，腔調，口吻", s: "I tried to use a sympathetic tone of voice."},
+{id: 768, w: "tough", p: "adj", d: "結實的；堅固的；堅強的", s: "These toys are made from tough plastic."},
+{id: 769, w: "track", p: "v", d: "跟蹤，追蹤", s: "It's difficult to track an animal over stony ground."},
+{id: 770, w: "transfer", p: "v", d: "搬；轉移", s: "He has been transferred to a psychiatric hospital."},
+{id: 771, w: "transfer", p: "n", d: "轉移；轉讓；調動", s: "The transfer of information between the two computers was successful."},
+{id: 772, w: "transform", p: "v", d: "使徹底改觀；使大變樣", s: "The reorganization will transform the entertainment industry."},
+{id: 773, w: "transition", p: "n", d: "轉變；過渡", s: "The health-care system is in transition at the moment."},
+{id: 774, w: "trial", p: "n", d: "審判，審理", s: "The trial proceedings were delayed due to the lawyer's illness."},
+{id: 775, w: "trip", p: "v", d: "絆，絆倒", s: "He tripped and fell down, grazing his knee."},
+{id: 776, w: "tropical", p: "adj", d: "熱帶的", s: "The aquarium is filled with many colourful tropical fish species."},
+{id: 777, w: "trouble", p: "v", d: "使煩惱，使苦惱；使憂慮", s: "I asked her what was troubling her, but she didn't want to talk."},
+{id: 778, w: "truly", p: "adv", d: "真實地；確實地；如實地", s: "At this time of year the river is a truly beautiful sight."},
+{id: 779, w: "trust", p: "n", d: "信任，信賴", s: "A good marriage is a relationship based on trust and understanding."},
+{id: 780, w: "trust", p: "v", d: "信任，信賴，相信", s: "My sister warned me not to trust him."},
+{id: 781, w: "try", p: "n", d: "設法，努力；試，嘗試", s: "They might still have tickets left - why don't you give it a try?"},
+{id: 782, w: "tune", p: "n", d: "曲調，曲子；旋律", s: "He was humming a tune as he dried the dishes."},
+{id: 783, w: "tunnel", p: "n", d: "隧道；地道；坑道", s: "The train went into the tunnel."},
+{id: 784, w: "ultimately", p: "adv", d: "最終，最後", s: "Everything will ultimately depend on what is said at the meeting with the directors next week."},
+{id: 785, w: "unconscious", p: "adj", d: "（尤指因頭部受傷）昏迷的，不省人事的", s: "She was hit on the head by a stone and knocked unconscious."},
+{id: 786, w: "unexpected", p: "adj", d: "出乎意料的，想不到的", s: "Her sudden resignation from the company was completely unexpected by everyone."},
+{id: 787, w: "unique", p: "adj", d: "獨一無二的；與眾不同的；唯一的；獨特的；罕見的", s: "Each person's genetic code is unique except in the case of identical twins."},
+{id: 788, w: "universe", p: "n", d: "宇宙；天地萬物；萬象", s: "Is there intelligent life elsewhere in the universe?"},
+{id: 789, w: "unknown", p: "adj", d: "未知的；不知名的；不瞭解的；不熟悉的", s: "The exact number of people carrying the virus is unknown."},
+{id: 790, w: "upper", p: "adj", d: "（位置或水準）較高的，較上的；上層的", s: "The office building's upper floors were being repainted."},
+{id: 791, w: "upwards", p: "adv", d: "向上地", s: "She turned her face upwards to the sun."},
+{id: 792, w: "urban", p: "adj", d: "城市的，城鎮的", s: "The government is planning a major new urban development project."},
+{id: 793, w: "urge", p: "v", d: "敦促；驅策；力勸", s: "Lawyers will urge the parents to take further legal action."},
+{id: 794, w: "value", p: "v", d: "給…估價", s: "He valued the painting at $2,000."},
+{id: 795, w: "vary", p: "v", d: "（使）不同；（使）呈現差異", s: "Salary scales vary significantly from state to state across the country."},
+{id: 796, w: "vast", p: "adj", d: "巨大的；廣大的", s: "A vast audience watched the broadcast."},
+{id: 797, w: "venue", p: "n", d: "（公共事件的）發生場所，舉行地點；會場", s: "The hotel is an ideal venue for conferences and business meetings."},
+{id: 798, w: "very", p: "adj", d: "（用於強調名詞）同一的，恰好的，正是的", s: "This is the very book I've been looking for all month."},
+{id: 799, w: "via", p: "prep", d: "經由，通過，透過", s: "The London-Addis flight goes via Rome."},
+{id: 800, w: "victory", p: "n", d: "勝利，獲勝；成功", s: "The Redskins opened the season by scoring a resounding victory against Detroit."},
+{id: 801, w: "violence", p: "n", d: "暴力行為；激烈的言辭", s: "It seems that the attack was a random act of violence."},
+{id: 802, w: "virtual", p: "adj", d: "幾乎…的；實質上的", s: "Ten years of incompetent government had brought about the virtual collapse of the country's economy."},
+{id: 803, w: "vision", p: "n", d: "幻景；幻像", s: "We see in his novels his sinister, almost apocalyptic, vision of the future."},
+{id: 804, w: "visual", p: "adj", d: "視覺的；視力的", s: "The movie relies heavily on stunning visual impact to entertain audiences."},
+{id: 805, w: "vital", p: "adj", d: "必不可少的；極其重要的", s: "A strong opposition is vital to a healthy democracy."},
+{id: 806, w: "vitamin", p: "n", d: "維生素；維他命", s: "You should take a vitamin pill every morning with your breakfast."},
+{id: 807, w: "volume", p: "n", d: "容積；體積；容量", s: "Which of these bottles do you think has the greater volume?"},
+{id: 808, w: "wage", p: "n", d: "（尤指支付給體力勞動者並通常按週計算的）工資，工錢，報酬", s: "The factory workers in this town earn a very low wage."},
+{id: 809, w: "way", p: "adv", d: "過度，大幅（尤其用於強調時間或空間中的程度或距離）", s: "After the third lap, she was way behind the other runners."},
+{id: 810, w: "weakness", p: "n", d: "虛弱；軟弱", s: "Any change of policy will be interpreted as a sign of weakness."},
+{id: 811, w: "wealth", p: "n", d: "財富，錢財", s: "During a successful business career, she accumulated a great amount of wealth."},
+{id: 812, w: "wealthy", p: "adj", d: "富有的，有錢的", s: "He's a very wealthy man."},
+{id: 813, w: "whereas", p: "conj", d: "儘管；但是；卻", s: "He must be about 60, whereas his wife looks about 30."},
+{id: 814, w: "wherever", p: "conj", d: "無論到（或在）哪裡；無論甚麼地方", s: "We can go wherever you like."},
+{id: 815, w: "whisper", p: "v", d: "小聲說話；低語；耳語", s: "She leaned over and whispered something in his ear."},
+{id: 816, w: "whisper", p: "n", d: "小聲說話；低語；耳語", s: "I heard whispers outside my room."},
+{id: 817, w: "whom", p: "pron", d: "作受詞時代替 who", s: "I met a man with whom I used to work."},
+{id: 818, w: "widely", p: "adv", d: "範圍廣地；廣泛地", s: "They have both travelled widely across Europe and Asia together."},
+{id: 819, w: "wildlife", p: "n", d: "野生動植物，野生生物", s: "We watched an interesting documentary on Peruvian wildlife last night."},
+{id: 820, w: "willing", p: "adj", d: "願意，樂意（做某事）", s: "If you're willing to fly at night, you can get a much cheaper ticket."},
+{id: 821, w: "wind", p: "v", d: "（道路或河流等）曲折前進，蜿蜒", s: "The river winds through the valley."},
+{id: 822, w: "wire", p: "n", d: "金屬絲；金屬線", s: "The farmer built a strong wire fence to keep the sheep inside."},
+{id: 823, w: "wise", p: "adj", d: "明智的；英明的；聰明的", s: "I think you made a wise choice."},
+{id: 824, w: "witness", p: "n", d: "（尤指犯罪或事故的）目擊者", s: "Police are appealing for witnesses to the accident to come forward."},
+{id: 825, w: "witness", p: "v", d: "目擊，看到（尤指事故或犯罪）", s: "Did anyone witness the attack that happened outside the bank?"},
+{id: 826, w: "worse", p: "n", d: "更糟的事；更壞的情況", s: "By the third month of the expedition they had endured many hardships, but worse was to follow."},
+{id: 827, w: "worst", p: "n", d: "最壞的人（或事）；最糟的情況", s: "That was the worst I've seen him play in several years."},
+{id: 828, w: "worth", p: "n", d: "價格；價值", s: "The estimated worth of the plastics and petrochemical industry is about $640 billion."},
+{id: 829, w: "wound", p: "n", d: "（身體上的）傷，傷口", s: "The soldier was treated in the hospital for a gunshot wound."},
+{id: 830, w: "wound", p: "v", d: "使受創傷；傷害", s: "Flying glass wounded her in the face and neck."},
+{id: 831, w: "wrap", p: "v", d: "（用紙、布或其他材料）包，裹", s: "She wrapped the present and tied it with ribbon."},
+{id: 832, w: "wrong", p: "n", d: "不道德；不正當；錯誤", s: "He has no sense of right and wrong."},
+{id: 833, w: "yet", p: "conj", d: "然而，儘管", s: "The solution he proposed was simple yet effective for the problem."},
+{id: 834, w: "zone", p: "n", d: "（尤指有不同特徵或用途的）地帶，地區", s: "They live in a dangerous earthquake zone near the fault line."}
+    ];
+
+    let questionBank = [];
+
+    // Helper to find the actual word form in the sentence
+    // This ensures that if the base is "kidnap" but sentence has "kidnapped", we use "kidnapped"
+    function preprocessQuestions() {
+        questionBank = rawData.map(item => {
+            // Remove double quotes often found in CSV imports
+            let cleanSentence = item.s.replace(/^"|"$/g, '').replace(/""/g, '"');
+            let baseForm = item.w;
+            
+            // Default to base form
+            let matchedWord = baseForm;
+
+            // Try to find the conjugated form in the sentence
+            // We look for the word starting with the base form (case insensitive)
+            // e.g. "kidnap" -> finds "kidnapped"
+            const tokens = cleanSentence.split(/[\s,.!?;:()"]+/);
+            
+            // Strategy 1: Look for word starting with base
+            let found = tokens.find(t => t.toLowerCase().startsWith(baseForm.toLowerCase()));
+            
+            // Strategy 2: If not found, and base ends in 'e', look for base minus 'e' (e.g. manipulate -> manipulated)
+            if (!found && baseForm.endsWith('e')) {
+                let stem = baseForm.slice(0, -1);
+                found = tokens.find(t => t.toLowerCase().startsWith(stem.toLowerCase()));
+            }
+
+            // Strategy 3: If not found, and base ends in 'y', look for base minus 'y' (e.g. try -> tries)
+            if (!found && baseForm.endsWith('y')) {
+                let stem = baseForm.slice(0, -1);
+                found = tokens.find(t => t.toLowerCase().startsWith(stem.toLowerCase()));
+            }
+            
+            // Strategy 4: Exact match check (fallback)
+            if (!found) {
+                 found = tokens.find(t => t.toLowerCase() === baseForm.toLowerCase());
+            }
+
+            if (found) {
+                // Remove any trailing non-letter characters that might have stuck
+                matchedWord = found.replace(/[^a-zA-Z-]$/g, '');
+            }
+
+            return {
+                word: matchedWord,
+                baseForm: baseForm,
+                pos: item.p,
+                definition_ch: item.d.replace(/^"|"$/g, ''), // Clean quotes from definition
+                sentence: cleanSentence
+            };
+        });
+    }
+
+    function createBlanks(bank) {
+        bank.forEach(q => {
+            const escapedWord = q.word.replace(/[.*+?^${}()|[]]/g, '\\$&'); 
+            const regex = new RegExp(`\\b${escapedWord}\\b`, 'gi');
+            
+            if (regex.test(q.sentence)) {
+                q.sentence = q.sentence.replace(regex, '_______');
+            } else {
+                 // Fallback if word identification failed slightly (e.g. case mismatch or punctuation)
+                 // Try case insensitive string replace
+                 const lowerSentence = q.sentence.toLowerCase();
+                 const lowerWord = q.word.toLowerCase();
+                 const index = lowerSentence.indexOf(lowerWord);
+                 if (index !== -1) {
+                     q.sentence = q.sentence.substring(0, index) + '_______' + q.sentence.substring(index + lowerWord.length);
+                 }
+            }
+        });
+        return bank;
+    }
+
+    function correctIndefiniteArticles(bank) {
+        const articleRegex = /(?<!\/)\b(a|an)\s+_______/gi;
+        const replacement = 'a/an _______';
+
+        bank.forEach(question => {
+            if (question.sentence.startsWith('A _______')) {
+                question.sentence = question.sentence.replace('A _______', 'A/An _______');
+            } else if (question.sentence.startsWith('An _______')) {
+                question.sentence = question.sentence.replace('An _______', 'A/An _______');
+            } else {
+                question.sentence = question.sentence.replace(articleRegex, replacement);
+            }
+        });
+        return bank;
+    }
+
+    // Initialize Data
+    preprocessQuestions();
+    
+    // Run the blank creation script
+    questionBank = createBlanks(questionBank);
+    
+    // Then run the article correction script
+    questionBank = correctIndefiniteArticles(questionBank);
+
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const endScreen = document.getElementById('end-screen');
+    const questionCounter = document.getElementById('question-counter');
+    const scoreCounter = document.getElementById('score-counter');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const nextBtn = document.getElementById('next-btn');
+    const finalScore = document.getElementById('final-score');
+    const endComment = document.getElementById('end-comment');
+    const restartBtn = document.getElementById('restart-btn');
+    const returnBtn = document.getElementById('return-btn');
+    const revisionContainer = document.getElementById('revision-container');
+    const revisionList = document.getElementById('revision-list');
+
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let questionsToAttempt = 0;
+    let answeredIncorrectly = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startGame(num) {
+        questionsToAttempt = Math.min(num, questionBank.length);
+        score = 0;
+        currentQuestionIndex = 0;
+        const shuffledBank = shuffleArray([...questionBank]);
+        currentQuestions = shuffledBank.slice(0, questionsToAttempt);
+
+        revisionContainer.style.display = 'none';
+        startScreen.style.display = 'none';
+        endScreen.style.display = 'none';
+        quizScreen.style.display = 'block';
+
+        displayQuestion();
+    }
+
+    function displayQuestion() {
+        answeredIncorrectly = false;
+        feedbackContainer.textContent = '';
+        nextBtn.style.display = 'none';
+        const question = currentQuestions[currentQuestionIndex];
+
+        questionCounter.textContent = `Question: ${currentQuestionIndex + 1} / ${questionsToAttempt}`;
+        scoreCounter.textContent = `Score: ${score}`;
+
+        const blankSpan = `<span class="blank"></span>`;
+        const sentence = question.sentence.replace('_______', blankSpan);
+        questionText.innerHTML = sentence;
+
+        // Check if the blank is at the start of the sentence
+        const cleanSentence = question.sentence.trim().replace(/^['"“]+/, '');
+        const isStartOfSentence = cleanSentence.startsWith('_______') || cleanSentence.startsWith('A/An _______');
+
+        const correctOption = question;
+        const distractors = getDistractors(correctOption);
+
+        const options = shuffleArray([correctOption, ...distractors]);
+
+        optionsContainer.innerHTML = '';
+        options.forEach(option => {
+            const button = document.createElement('button');
+            
+            // If the blank is at the start of the sentence, capitalize the first letter of ALL options
+            let displayWord = option.word;
+            if (isStartOfSentence) {
+                displayWord = displayWord.charAt(0).toUpperCase() + displayWord.slice(1);
+            }
+
+            button.textContent = displayWord;
+            button.classList.add('option-btn');
+            button.dataset.word = option.word; // Keep original word for checking correctness
+            button.dataset.baseForm = option.baseForm;
+            button.dataset.pos = option.pos;
+            button.dataset.definition = option.definition_ch;
+            button.addEventListener('click', checkAnswer);
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function conjugate(base, inflection) {
+        if (!inflection || base === inflection) return base;
+
+        const vowels = "aeiou";
+        const lastChar = base.slice(-1);
+        const secondLastChar = base.slice(-2, -1);
+
+        if (inflection === 's') {
+            if (lastChar === 'y' && !vowels.includes(secondLastChar)) {
+                return base.slice(0, -1) + 'ies';
+            }
+            if (['s', 'x', 'z'].includes(lastChar) || ['sh', 'ch'].includes(base.slice(-2))) {
+                return base + 'es';
+            }
+            return base + 's';
+        }
+        if (inflection === 'd' || inflection === 'ed') {
+            if (lastChar === 'e') {
+                return base + 'd';
+            }
+            if (lastChar === 'y' && !vowels.includes(secondLastChar)) {
+                return base.slice(0, -1) + 'ied';
+            }
+            if (base.length > 1 && !vowels.includes(lastChar) && vowels.includes(secondLastChar) && !['w', 'x', 'y'].includes(lastChar)) {
+                 const thirdLastChar = base.slice(-3,-2);
+                 if (base.length === 2 || !vowels.includes(thirdLastChar)) {
+                    return base + lastChar + 'ed';
+                 }
+            }
+            return base + 'ed';
+        }
+        if (inflection === 'ing') {
+             if (base.endsWith('ie')) {
+                return base.slice(0, -2) + 'ying';
+            }
+            if (lastChar === 'e' && !base.endsWith('ee')) {
+                return base.slice(0, -1) + 'ing';
+            }
+            if (base.length > 1 && !vowels.includes(lastChar) && vowels.includes(secondLastChar) && !['w', 'x', 'y'].includes(lastChar)) {
+                const thirdLastChar = base.slice(-3,-2);
+                if (base.length === 2 || !vowels.includes(thirdLastChar)) {
+                   return base + lastChar + 'ing';
+                }
+            }
+            return base + 'ing';
+        }
+
+        return base;
+    }
+
+    function getDistractors(correctOption) {
+        const distractors = [];
+        const usedBaseForms = new Set([correctOption.baseForm]);
+        let inflection = '';
+
+        // Determine inflection based on the difference between the word in sentence and base form
+        if (correctOption.word !== correctOption.baseForm) {
+            if (correctOption.pos === 'v') {
+                if (correctOption.word.endsWith('s') && !correctOption.word.endsWith('ss')) inflection = 's';
+                else if (correctOption.word.endsWith('ed')) inflection = 'ed';
+                else if (correctOption.word.endsWith('d') && !correctOption.baseForm.endsWith('d')) inflection = 'd';
+                else if (correctOption.word.endsWith('ing')) inflection = 'ing';
+            } else if (correctOption.pos === 'n') {
+                if (correctOption.word.endsWith('ies')) inflection = 's'; // simplistic check for y->ies
+                else if (correctOption.word.endsWith('s') && !correctOption.word.endsWith('ss')) inflection = 's';
+            }
+        }
+
+        const candidates = shuffleArray(questionBank.filter(q => q.pos === correctOption.pos && q.baseForm !== correctOption.baseForm));
+
+        for (const candidate of candidates) {
+            if (distractors.length < 3 && !usedBaseForms.has(candidate.baseForm)) {
+                const distractorBaseForm = candidate.baseForm;
+                const conjugatedWord = conjugate(distractorBaseForm, inflection);
+
+                distractors.push({
+                    word: conjugatedWord,
+                    baseForm: distractorBaseForm,
+                    pos: candidate.pos,
+                    definition_ch: candidate.definition_ch
+                });
+                usedBaseForms.add(distractorBaseForm);
+            }
+        }
+
+        // Fallback if not enough candidates
+        while (distractors.length < 3) {
+            const randomCandidate = questionBank[Math.floor(Math.random() * questionBank.length)];
+            if (!usedBaseForms.has(randomCandidate.baseForm)) {
+                const distractorBaseForm = randomCandidate.baseForm;
+                const conjugatedWord = conjugate(distractorBaseForm, inflection);
+                distractors.push({
+                    word: conjugatedWord,
+                    baseForm: distractorBaseForm,
+                    pos: randomCandidate.pos,
+                    definition_ch: randomCandidate.definition_ch
+                });
+                usedBaseForms.add(distractorBaseForm);
+            }
+        }
+        return distractors;
+    }
+
+    function checkAnswer(e) {
+        const selectedButton = e.target;
+        const selectedWord = selectedButton.dataset.word;
+        const correctWord = currentQuestions[currentQuestionIndex].word;
+
+        const baseForm = selectedButton.dataset.baseForm;
+        const pos = selectedButton.dataset.pos;
+        const definition = selectedButton.dataset.definition;
+        feedbackContainer.textContent = `${baseForm}: (${pos}) ${definition}`;
+
+        if (selectedWord === correctWord) {
+            selectedButton.classList.add('correct');
+            if (!answeredIncorrectly) {
+                score++;
+            }
+            disableOptions();
+            nextBtn.style.display = 'inline-block';
+        } else {
+            selectedButton.classList.add('incorrect');
+            selectedButton.disabled = true;
+            answeredIncorrectly = true;
+        }
+    }
+
+    function disableOptions() {
+        Array.from(optionsContainer.children).forEach(button => {
+            button.disabled = true;
+        });
+    }
+
+    function handleNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questionsToAttempt) {
+            displayQuestion();
+        } else {
+            endGame();
+        }
+    }
+
+    function endGame() {
+        quizScreen.style.display = 'none';
+        endScreen.style.display = 'block';
+
+        finalScore.textContent = `${score} / ${questionsToAttempt}`;
+        const percentage = (score / questionsToAttempt) * 100;
+
+        let comment = '';
+        if (percentage === 100) {
+            comment = "Flawless! You've mastered these words. Well done!";
+        } else if (percentage >= 80) {
+            comment = "Excellent work! You have a strong command of these words.";
+        } else if (percentage >= 60) {
+            comment = "Good job! A little more revision will make you an expert.";
+        } else if (percentage >= 40) {
+            comment = "Solid effort. Keep practicing to get more familiar with the words.";
+        } else {
+            comment = "A good start. Do some revision and try again to boost your score!";
+        }
+        endComment.textContent = comment;
+
+        displayRevisionList();
+    }
+
+    function displayRevisionList() {
+        revisionContainer.style.display = 'block';
+        revisionList.innerHTML = '';
+
+        currentQuestions.forEach(question => {
+            const item = document.createElement('div');
+            item.classList.add('revision-item');
+
+            let displayWord = question.word;
+            if (question.sentence.startsWith('_______') || question.sentence.startsWith('A/An _______')) {
+                displayWord = displayWord.charAt(0).toUpperCase() + displayWord.slice(1);
+            }
+
+            const fullSentence = question.sentence.replace('_______', `<strong>${displayWord}</strong>`);
+
+            item.innerHTML = `
+                <p class="word-info">${question.baseForm} <span>(${question.pos}) ${question.definition_ch}</span></p>
+                <p class="sentence-info">${fullSentence}</p>
+            `;
+            revisionList.appendChild(item);
+        });
+    }
+
+    function resetToTitle() {
+        endScreen.style.display = 'none';
+        quizScreen.style.display = 'none';
+        startScreen.style.display = 'block';
+    }
+
+    nextBtn.addEventListener('click', handleNextQuestion);
+    restartBtn.addEventListener('click', resetToTitle);
+    returnBtn.addEventListener('click', resetToTitle);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        startScreen.style.display = 'block';
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    });
+
+</script>
+
+
+
+</body></html>
