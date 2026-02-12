@@ -1312,6 +1312,7 @@
             selectedButton.classList.add('correct');
             if (!answeredIncorrectly) {
                 score++;
+                scoreCounter.textContent = `Score: ${score}`;
             }
             disableOptions();
             
